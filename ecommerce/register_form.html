@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="form.css" />
+  </head>
+  <body>
+    <div class="flex-form">
+      <form
+        id="registration-form"
+        action="server/functions/register.php"
+        method="post"
+        onsubmit="return validateForm()"
+      >
+        <fieldset>
+          <legend>Register For An Account:</legend>
+          <div class="form-set">
+            <label for="email">Email:</label><br />
+            <input type="email" name="email" id="email" /><br />
+          </div>
+          <div class="form-set">
+            <label for="address">Address:</label><br />
+            <input type="text" name="address" id="address" required /><br />
+          </div>
+          <div class="form-set">
+            <label for="password">Password:</label><br />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+            /><br />
+          </div>
+          <div class="form-set">
+            <label for="confirmpassword">Confirm Password:</label><br />
+            <input
+              type="password"
+              name="confirmpassword"
+              id="confirmpassword"
+              required
+            /><br />
+          </div>
+          <div class="form-set">
+            <label for="role">Role:</label>
+            <select name="role" id="role">
+              <option value="1" selected>Buyer</option>
+              <option value="2">Seller</option>
+            </select>
+          </div>
+
+          <div class="form-set errors" style="display: none">
+            <ul>
+              <li>Password and Confirm password do not match.</li>
+              <li>Password should be at least 8 characters long.</li>
+              <li>Email must be valid.</li>
+              <li>Email must be unique.</li>
+            </ul>
+          </div>
+          <div class="form-set">
+            <input class="btn" type="submit" value="Register" />
+          </div>
+          <div class="form-set">
+            <p>Already have an account? <a href="./login_form.php">Login</a></p>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <script src="js/register.js"></script>
+    <script>
+      function validateForm() {
+        // Reset the error messages
+        document.querySelector(".form-set.errors ul").innerHTML = "";
+        document.querySelector(".form-set.errors").style.display = "none";
+
+        // Get form inputs
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirmpassword").value;
+
+        // Check password length
+        if (password.length < 8) {
+          showError("Password should be at least 8 characters long.");
+          return false;
+        }
+
+        // Check if password and confirmPassword match
+        if (password !== confirmPassword) {
+          showError("Password and Confirm password do not match.");
+          return false;
+        }
+
+        // Check if email is valid (basic check)
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!email.match(emailPattern)) {
+          showError("Email must be valid.");
+          return false;
+        }
+
+        // Check if email is unique (you need server-side validation for this)
+
+        // If all checks pass, the form is valid
+        return true;
+      }
+
+      function showError(message) {
+        const errorList = document.querySelector(".form-set.errors ul");
+        const errorItem = document.createElement("li");
+        errorItem.textContent = message;
+        errorList.appendChild(errorItem);
+        document.querySelector(".form-set.errors").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="form.css" />
+    </head>
+    <body>
+        <div class="flex-form">
+            <form action="server/functions/register.php" method="post">
+                <fieldset>
+                    <legend>Register For An Account:</legend>
+                    <div class="form-set">
+                        <label for="email">Email:</label><br />
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-set">
+                        <label for="email">Address:</label><br />
+                        <input
+                            type="text"
+                            name="address"
+                            id="address"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-set">
+                        <label for="password">Password:</label><br />
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-set">
+                        <label for="confirmpassword">Confirm Password:</label
+                        ><br />
+                        <input
+                            type="password"
+                            name="confirmpassword"
+                            id="confirmpassword"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-set">
+                        <label for="role">Role:</label>
+                        <select name="role" id="">
+                            <option value="1" selected>Buyer</option>
+                            <option value="2">Seller</option>
+                        </select>
+                    </div>
+
+                    <div class="form-set errors" style="display: none">
+                        <ul>
+                            <li>
+                                Password and Confirm password does not match.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-set">
+                        <input class="btn" type="submit" value="Register" />
+                    </div>
+                    <div class="form-set">
+                        <p>
+                            Already have an account?
+                            <a href="./login_form.php">Login</a>
+                        </p>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <script src="js/register.js"></script>
+    </body>
+</html> -->

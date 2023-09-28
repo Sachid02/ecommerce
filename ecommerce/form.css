@@ -1,0 +1,52 @@
+* {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.flex-form {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 100px;
+}
+
+form {
+    width: 40vw;
+}
+
+fieldset {
+    border: 1px solid #9075d8;
+    box-shadow: 10px 10px 5px #9075d8;
+}
+
+label {
+    color: #674ab3;
+}
+
+input {
+    width: 100%;
+    padding: 5px;
+}
+
+input:focus {
+    border: 1px solid #674ab3;
+}
+
+.form-set {
+    margin: 20px;
+}
+
+.btn {
+    padding: 10px;
+    border: 0;
+    border-radius: 10px;
+    background-color: #674ab3;
+    color: white;
+    width: 100%;
+    font-size: 20px;
+}
+
+legend {
+    text-align: center;
+    font-size: 40px;
+    color: #9075d8;
+}
